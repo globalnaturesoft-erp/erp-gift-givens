@@ -1,0 +1,67 @@
+<% content_for :title do %>
+    <%= t('.givens') %>
+<% end %>
+
+<% content_for :page_title do %>
+    <i class="glyphicon glyphicon-gift"></i> <%= t('.givens') %>
+<% end %>
+
+<% content_for :page_toolbar do %>
+    <%= erp_component('button/create', {
+        text: t('.create'),
+        href: erp_gift_givens.new_backend_given_path,
+        class: 'btn-noborder'
+    }) %>
+<% end %>
+
+<%= erp_datalist(
+    url: erp_gift_givens.list_backend_givens_path,
+    keywords: [
+        {
+            text: t('.given_code'), name: 'erp_gift_givens_givens.code'
+        },
+        {
+            text: t('creator'),
+            name: 'erp_users.name',
+            select: {
+                name: 'erp_users.id',
+                data_url: erp.dataselect_backend_users_path
+            }
+        }
+    ],
+    actions: [
+        
+    ],
+    filters: [
+        
+    ],
+    columns: [
+        {
+            text: t('.code'), name: 'code', value: true, checked: true
+        },
+        {
+            text: t('.given_date'), name: 'given_date', value: true, checked: true
+        },
+        {
+            text: t('.contact'), name: 'contact', value: true, checked: true
+        },
+        {
+            text: t('.quantity'), name: 'quantity', value: true, checked: true
+        },
+        {
+            text: t('.note'), name: 'note', value: true, checked: false
+        },
+        {
+            text: t('.status'), name: 'status', value: true, checked: true
+        },
+        {
+            text: t('.creator'), name: 'creator', value: true, checked: true
+        },
+        {
+            text: t('.approver'), name: 'approver', value: true, checked: true
+        },
+        {
+            text: t('.created_at'), name: 'created_at', value: true, checked: false
+        }
+    ]
+) %>

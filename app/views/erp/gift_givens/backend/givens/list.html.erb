@@ -1,0 +1,129 @@
+<table class="table table-advance table-hover table-striped table-checkable order-column" id="">
+    <thead>
+        <tr>
+            <th width='1%'>
+                <%= erp_datalist_check_all %>
+            </th>
+            <% if get_columns(params).include?("code") %>
+                <th class="sortable" sort-by='erp_gift_givens_givens.code'>
+                    <%= t('.code') %>
+                </th>
+            <% end %>
+            <% if get_columns(params).include?("given_date") %>
+                <th>
+                    <%= t('.given_date') %>
+                </th>
+            <% end %>
+            <% if get_columns(params).include?("contact") %>
+                <th>
+                    <%= t('.contact') %>
+                </th>
+            <% end %>
+            <% if get_columns(params).include?("quantity") %>
+                <th class="text-center">
+                    <%= t('.quantity') %>
+                </th>
+            <% end %>
+            <% if get_columns(params).include?("note") %>
+                <th class="text-center">
+                    <%= t('.note') %>
+                </th>
+            <% end %>
+            <% if get_columns(params).include?("status") %>
+                <th>
+                    <%= t('.status') %>
+                </th>
+            <% end %>
+            <% if get_columns(params).include?("creator") %>
+                <th class="text-center">
+                    <%= t('.creator') %>
+                </th>
+            <% end %>
+            <% if get_columns(params).include?("approver") %>
+                <th class="text-center">
+                    <%= t('.approver') %>
+                </th>
+            <% end %>
+            <% if get_columns(params).include?("created_at") %>
+                <th class="sortable" sort-by='erp_gift_givens_givens.created_at'>
+                    <%= t('.created_at') %>
+                </th>
+            <% end %>
+            <th width="7%"><%= t('.actions') %></th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @givens.each do |given| %>
+            <tr class="odd gradeX has-child-table" data-url="<%= erp_gift_givens.given_details_backend_givens_path(id: given.id) %>">
+                <td>
+                    <%= erp_datalist_check_row(id: given.id) %>
+                </td>
+                <% if get_columns(params).include?("code") %>
+                <td>
+                    <i class="fa fa-plus expand tr-expand-button"></i>
+                    <strong><%= link_to given.code, erp_gift_givens.edit_backend_given_path(given) %></strong>
+                </td>
+                <% end %>
+                <% if get_columns(params).include?("given_date") %>
+                <td><%= given.given_date.strftime("%d/%m/%Y") %></td>
+                <% end %>
+                <% if get_columns(params).include?("contact") %>
+                <td><%= given.contact_name %></td>
+                <% end %>
+                <% if get_columns(params).include?("quantity") %>
+                <td class="text-center"><%= given.total_quantity %></td>
+                <% end %>
+                <% if get_columns(params).include?("note") %>
+                <td><%= given.note %></td>
+                <% end %>
+                <% if get_columns(params).include?("status") %>
+                <td>
+                    received
+                </td>
+                <% end %>
+                <% if get_columns(params).include?("creator") %>
+                <td>
+                    <%= erp_component('avatar', {
+                        user: given.creator
+                    }) %>
+                </td>
+                <% end %>
+                <% if get_columns(params).include?("approver") %>
+                <td>
+                    <%= erp_component('avatar', {
+                        user: given.creator
+                    }) %>
+                </td>
+                <% end %>
+                <% if get_columns(params).include?("created_at") %>
+                <td><%= given.created_at.strftime("%d/%m/%Y") %></td>
+                <% end %>
+                <td>
+                    <%= erp_datalist_row_actions(
+                            [
+                                {
+                                    text: '<i class="fa fa-edit"></i> '+t('.edit'),
+                                    href: erp_gift_givens.edit_backend_given_path(given)
+                                },
+                                {
+                                    divider: true
+                                },
+                                {
+                                    text: '<i class="fa fa-trash"></i> '+t('.delete'),
+                                    url: erp_gift_givens.backend_given_path(given),
+                                    data_method: 'DELETE',
+                                    class: 'ajax-link',
+                                    data_confirm: t('.delete_confirm')
+                                }
+                            ]
+                        ) %>
+                </td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
+<% if @givens.empty? %>
+    <div class="datalist-empty-line"><%= t('.no_matching_records_found') %></div>
+<% end %>
+    
+<%= erp_datalist_pagination(@givens) %>

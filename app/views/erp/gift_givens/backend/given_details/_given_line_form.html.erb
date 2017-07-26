@@ -1,0 +1,18 @@
+<input type="hidden" name="given[given_details_attributes][<%= uid %>][id]" value="<%= given_detail.id %>">
+<input type="hidden" name="given[given_details_attributes][<%= uid %>][product_id]" value="<%= given_detail.product_id %>" class="product-id">
+<input type="hidden" name="given[given_details_attributes][<%= uid %>][_destroy]" value="">
+<td><%= given_detail.product_code %></td>
+<td><%= given_detail.product_name %></td>
+<td width='10%'>
+    <%= erp_form_control("number", {
+        name: 'given[given_details_attributes][' + uid + '][quantity]',
+        value: given_detail.quantity,
+        text: given_detail.quantity,
+        class: "line_quantity inline"
+    }) %>
+</td>
+<td class="text-right">
+    <%= erp_form_control("addableform_remove_button", {
+        is_nested_form: true
+    }) %>
+</td>

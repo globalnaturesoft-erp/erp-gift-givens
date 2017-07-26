@@ -1,0 +1,79 @@
+vi:
+  layouts:
+    erp:
+      backend:
+        sidebar:
+          gift_given: "Xuất tặng"
+          givens: "Phiếu xuất tặng"
+  erp:
+    gift_givens:
+      backend:
+        givens:
+          create:
+            success: "Tạo phiếu xuất tặng thành công"
+          update:
+            success: "Cập nhật phiếu xuất tặng thành công"
+          destroy:
+            success: "Xóa phiếu xuất tặng thành công"
+          index:
+            givens: "Xuất tặng"
+            create: "Tạo phiếu xuất tặng"
+            given_code: "Mã phiếu"
+            code: "Mã phiếu"
+            given_date: "Ngày xuất tặng"
+            contact: "Người nhận"
+            quantity: "Số lượng"
+            note: "Ghi chú"
+            status: "Trạng thái"
+            creator: "Người tạo"
+            approver: "Người duyệt"
+            created_at: "Ngày tạo"
+          list:
+            code: "Mã phiếu"
+            given_date: "Ngày xuất tặng"
+            contact: "Người nhận"
+            quantity: "Số lượng"
+            note: "Ghi chú"
+            status: "Trạng thái"
+            creator: "Người tạo"
+            approver: "Người duyệt"
+            created_at: "Ngày tạo"
+            actions: "Tùy chọn"
+            edit: "Chỉnh sửa"
+            delete: "Xóa phiếu tặng"
+            delete_confirm: "Dữ liệu này sẽ bị xóa vĩnh viễn! Bạn có thực sự muốn xóa?"
+          new:
+            givens: "Xuất tặng"
+            create: "Tạo phiếu xuất tặng"
+          edit:
+            givens: "Xuất tặng"
+            edit: "Chỉnh sửa"
+            create: "Tạo phiếu xuất tặng"
+          form:
+            code: "Mã phiếu"
+            given_date: "Ngày xuất tặng"
+            contact: "Người nhận / Xuất tặng cho"
+            note: "Ghi chú / Mô tả"
+            help_given_code: "Mã phiếu sẽ tạo tự động nếu bạn bỏ trống"
+            placeholder_given_code: "Mã phiếu xuất tặng"
+            choose_given_date: "Tùy chọn ngày xuất tặng"
+            choose_contact: "Chọn người nhận / Xuất tặng cho ai?"
+            enter_note: "Nhập nội dung mô tả"
+            product: "Sản phẩm"
+            help_product: "Hàng xuất tặng"
+            choose_product: "Lựa chọn sản phẩm xuất tặng"
+            create_product: "Thêm sản phẩm"
+            edit_product: "Chỉnh sửa sản phẩm"
+            add: "Thêm vào danh sách xuất tặng"
+            product_code: "Mã sản phẩm"
+            product_name: "Tên sản phẩm"
+            quantity: "Số lượng"
+            action: "Hành động"
+            quantity_total: "Tổng số lượng"
+            submit: "Lưu"
+            cancel: "Hủy"
+          given_details:
+            product_code: "Mã sản phẩm"
+            product_name: "Tên sản phẩm"
+            quantity: "Số lượng"
+            unit: "Đơn vị tính"
