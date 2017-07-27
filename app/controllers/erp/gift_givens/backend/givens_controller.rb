@@ -10,7 +10,7 @@ module Erp
         
         # POST /givens/list
         def list
-          @givens = Given.search(params).paginate(:page => params[:page], :per_page => 5)
+          @givens = Given.search(params).paginate(:page => params[:page], :per_page => 10)
           
           render layout: nil
         end
