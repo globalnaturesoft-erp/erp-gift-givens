@@ -14,11 +14,29 @@
     }) %>
 <% end %>
 
+<% content_for :global_filter do %>
+    <div class="row top-datalist">
+        <div class="col-md-3">
+            <%= erp_form_control('dateranges', {
+                name: ''
+            }) %>
+        </div>
+    </div>
+<% end %>
+
 <%= erp_datalist(
     url: erp_gift_givens.list_backend_givens_path,
     keywords: [
         {
             text: t('.given_code'), name: 'erp_gift_givens_givens.code'
+        },
+        {
+            text: t('.receiver'),
+            name: 'erp_contacts_contacts.name',
+            select: {
+                name: 'erp_contacts_contacts.id',
+                data_url: erp_contacts.dataselect_backend_contacts_path
+            }
         },
         {
             text: t('creator'),

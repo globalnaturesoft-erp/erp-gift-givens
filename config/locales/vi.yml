@@ -22,6 +22,7 @@ vi:
             code: "Mã phiếu"
             given_date: "Ngày xuất tặng"
             contact: "Người nhận"
+            receiver: "Người nhận"
             quantity: "Số lượng"
             note: "Ghi chú"
             status: "Trạng thái"
