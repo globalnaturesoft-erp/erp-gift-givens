@@ -12,6 +12,14 @@ module Erp
         def list
           @givens = Given.search(params).paginate(:page => params[:page], :per_page => 10)
           
+          if params.to_unsafe_hash[:global_filter].present? and params.to_unsafe_hash[:global_filter][:given_from_date].present?
+            @givens = @givens.where('given_date >= ?', params.to_unsafe_hash[:global_filter][:given_from_date].to_date.beginning_of_day)
+          end
+
+          if params.to_unsafe_hash[:global_filter].present? and params.to_unsafe_hash[:global_filter][:given_to_date].present? 
+            @givens = @givens.where('given_date <= ?', params.to_unsafe_hash[:global_filter][:given_to_date].to_date.end_of_day)
+          end
+          
           render layout: nil
         end
         

@@ -17,8 +17,17 @@
 <% content_for :global_filter do %>
     <div class="row top-datalist">
         <div class="col-md-3">
-            <%= erp_form_control('dateranges', {
-                name: ''
+            <%= erp_form_control('date', {
+                label: t('.given_from_date'),
+                name: 'given_from_date',
+                placeholder: t('.select_from_date')
+            }) %>
+        </div>
+        <div class="col-md-3">
+            <%= erp_form_control('date', {
+                label: t('.given_to_date'),
+                name: 'given_to_date',
+                placeholder: t('.select_to_date')
             }) %>
         </div>
     </div>
