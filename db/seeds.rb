@@ -1,5 +1,9 @@
 user = Erp::User.first
 contacts = ['Marcus Doe', 'Nick Larson', 'Richard Stone', 'Paul Kiton', 'Mark	Otto']
+status = [Erp::GiftGivens::Given::STATUS_DRAFT,
+          Erp::GiftGivens::Given::STATUS_ACTIVE,
+          Erp::GiftGivens::Given::STATUS_DELIVERED,
+          Erp::GiftGivens::Given::STATUS_DELETED]
 
 # Contacts
 contacts.each do |c|
@@ -21,6 +25,7 @@ Erp::GiftGivens::Given.all.destroy_all
     code: 'GG'+ num.to_s.rjust(3, '0'),
     given_date: Time.now,
     contact_id: contact_ps.id,
+    status: status[rand(status.count)],
     creator_id: user.id
   )
   Erp::Products::Product.where(id: Erp::Products::Product.pluck(:id).sample(rand(1..5))).each do |product|
