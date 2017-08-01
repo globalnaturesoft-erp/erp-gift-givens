@@ -27,7 +27,8 @@ Erp::GiftGivens::Given.all.destroy_all
     Erp::GiftGivens::GivenDetail.create(
       product_id: product.id,
       given_id: given.id,
-      quantity: rand(1..3)
+      quantity: rand(1..3),
+      warehouse_id: Erp::Warehouses::Warehouse.order("RANDOM()").first.id
     )
   end
 end

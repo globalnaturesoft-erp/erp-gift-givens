@@ -11,6 +11,15 @@
         class: "line_quantity inline"
     }) %>
 </td>
+<td width='20%'>
+    <%= erp_form_control("dataselect", {
+        name: "given[given_details_attributes][#{uid}][warehouse_id]",
+        value: given_detail.warehouse_id,
+        text: given_detail.warehouse_name,
+        placeholder: t('.choose_warehouse'),
+        url: erp_warehouses.dataselect_backend_warehouses_path(format: 'json')
+    }) %>
+</td>
 <td class="text-right">
     <%= erp_form_control("addableform_remove_button", {
         is_nested_form: true

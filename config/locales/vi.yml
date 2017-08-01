@@ -69,6 +69,7 @@ vi:
             product_code: "Mã sản phẩm"
             product_name: "Tên sản phẩm"
             quantity: "Số lượng"
+            warehouse: "Kho xuất hàng"
             action: "Hành động"
             quantity_total: "Tổng số lượng"
             submit: "Lưu"
@@ -78,3 +79,7 @@ vi:
             product_name: "Tên sản phẩm"
             quantity: "Số lượng"
             unit: "Đơn vị tính"
+            warehouse: "Xuất từ kho"
+        given_details:
+          given_line_form:
+            choose_warehouse: "Chọn kho xuất hàng tặng"

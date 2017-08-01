@@ -7,6 +7,7 @@
                     <th class="numeric text-left"><%= t('.product_name') %></th>
                     <th class="numeric text-right"><%= t('.quantity') %></th>
                     <th class="numeric text-right"><%= t('.unit') %></th>
+                    <th class="numeric text-right"><%= t('.warehouse') %></th>
                 </tr>
             </thead>
             <tbody>
@@ -16,6 +17,7 @@
                     <td class="numeric text-left"><%= given_detail.product_name %></td>
                     <td class="numeric text-right"><%= format_number(given_detail.quantity) %></td>
                     <td class="numeric text-right"></td>
+                    <td class="numeric text-right"><%= given_detail.warehouse_name %></td>
                 </tr>
                 <% end %>
             </tbody>
