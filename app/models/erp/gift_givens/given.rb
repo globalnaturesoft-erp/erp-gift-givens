@@ -5,6 +5,17 @@ module Erp::GiftGivens
     has_many :given_details, inverse_of: :given, dependent: :destroy
     accepts_nested_attributes_for :given_details, :reject_if => lambda { |a| a[:product_id].blank? || a[:warehouse_id].blank? || a[:quantity].blank? || a[:quantity].to_i <= 0 }
     
+    after_save :update_cache_products_count
+    before_create :migrate_given_code
+    
+    validates :code, :given_date, :contact_id, presence: true
+    
+    # class const
+    STATUS_DRAFT = 'draft'
+    STATUS_ACTIVE = 'active'
+    STATUS_DELIVERED = 'delivered'
+    STATUS_DELETED = 'deleted'
+    
     # Filters
     def self.filter(query, params)
       params = params.to_unsafe_hash
@@ -52,18 +63,80 @@ module Erp::GiftGivens
     end
     
     def self.search(params)
-      query = self.order("created_at DESC")
+      query = self.all
       query = self.filter(query, params)
+      
+      # order
+      if params[:sort_by].present?
+        order = params[:sort_by]
+        order += " #{params[:sort_direction]}" if params[:sort_direction].present?
+
+        query = query.order(order)
+      else
+				query = query.order('created_at desc')
+      end
       
       return query
     end
     
+    # Set status for stock transfer
+    def set_draft
+      update_attributes(status: Erp::StockTransfers::Transfer::STATUS_DRAFT)
+    end
+    
+    def set_activate
+      update_attributes(status: Erp::StockTransfers::Transfer::STATUS_ACTIVE)
+    end
+    
+    def set_delivered
+      update_attributes(status: Erp::StockTransfers::Transfer::STATUS_DELIVERED)
+    end
+    
+    def set_deleted
+      update_attributes(status: Erp::StockTransfers::Transfer::STATUS_DELETED)
+    end
+    
+    # check if gift given is draft/active/delivered/deleted
+    def draft?
+      return self.status == Erp::GiftGivens::Given::STATUS_DRAFT
+    end
+    
+    def active?
+      return self.status == Erp::GiftGivens::Given::STATUS_ACTIVE
+    end
+    
+    def delivered?
+      return self.status == Erp::GiftGivens::Given::STATUS_DELIVERED
+    end
+    
+    def deleted?
+      return self.status == Erp::GiftGivens::Given::STATUS_DELETED
+    end
+    
+    # display contact name
     def contact_name
       contact.present? ? contact.name : ''
     end
     
+    # Total item count for transfer details
     def total_quantity
 			return given_details.sum('quantity')
+		end
+    
+    # Update cache products count
+    def update_cache_products_count
+			self.update_column(:cache_products_count, self.total_quantity)
+		end
+    
+    # Migrate given code
+    def migrate_given_code
+			lastest = Given.all.order("id DESC").first
+			if !lastest.nil?
+				num = lastest.id.to_i + 1
+				self.code = "ST" + num.to_s.rjust(3, '0')
+			else
+				self.code = "ST" + 1.to_s.rjust(3, '0')
+			end
 		end
   end
 end

@@ -4,6 +4,15 @@ module Erp::GiftGivens
     belongs_to :warehouse, class_name: 'Erp::Warehouses::Warehouse', foreign_key: :warehouse_id
     belongs_to :given, inverse_of: :given_details
     
+    after_save :update_given_cache_products_count
+    
+    # update given cache products count
+    def update_given_cache_products_count
+			if given.present?
+				given.update_cache_products_count
+			end
+		end
+    
     def product_code
       product.nil? ? '' : product.code
     end

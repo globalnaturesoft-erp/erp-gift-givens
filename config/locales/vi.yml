@@ -29,6 +29,10 @@ vi:
             creator: "Người tạo"
             approver: "Người duyệt"
             created_at: "Ngày tạo"
+            draft: "Phiếu tạm"
+            active: "Đã xác nhận"
+            delivered: "Đã giao"
+            deleted: "Đã xóa"
           list:
             code: "Mã phiếu"
             given_date: "Ngày xuất tặng"
@@ -41,8 +45,14 @@ vi:
             created_at: "Ngày tạo"
             actions: "Tùy chọn"
             edit: "Chỉnh sửa"
+            activate: "Xác nhận phiếu"
+            delivery: "Xuất tặng"
             delete: "Xóa phiếu tặng"
             delete_confirm: "Dữ liệu này sẽ bị xóa vĩnh viễn! Bạn có thực sự muốn xóa?"
+            draft: "Phiếu tạm"
+            active: "Đã xác nhận"
+            delivered: "Đã giao"
+            deleted: "Đã xóa"
           new:
             givens: "Xuất tặng"
             create: "Tạo phiếu xuất tặng"
@@ -83,3 +93,20 @@ vi:
         given_details:
           given_line_form:
             choose_warehouse: "Chọn kho xuất hàng tặng"
+            
+  activerecord:
+    errors:
+      models:
+        erp/gift_givens/given:
+          attributes:
+            code:
+              blank: "không được để trống."
+            contact_id:
+              blank: "không được để trống."
+            given_date:
+              blank: "không được để trống."
+    attributes:
+      erp/gift_givens/given:
+        code: "Mã xuất tặng"
+        contact_id: "Người nhận quà"
+        given_date: "Ngày xuất tặng"

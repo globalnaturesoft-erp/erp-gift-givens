@@ -51,7 +51,18 @@
         
     ],
     filters: [
-        
+        {
+            text: t('.draft'), name: 'erp_gift_givens_givens.status', value: Erp::GiftGivens::Given::STATUS_DRAFT, checked: true
+        },
+        {
+            text: t('.active'), name: 'erp_gift_givens_givens.status', value: Erp::GiftGivens::Given::STATUS_ACTIVE, checked: true
+        },
+        {
+            text: t('.delivered'), name: 'erp_gift_givens_givens.status', value: Erp::GiftGivens::Given::STATUS_DELIVERED, checked: false
+        },
+        {
+            text: t('.deleted'), name: 'erp_gift_givens_givens.status', value: Erp::GiftGivens::Given::STATUS_DELETED, checked: false
+        }
     ],
     columns: [
         {

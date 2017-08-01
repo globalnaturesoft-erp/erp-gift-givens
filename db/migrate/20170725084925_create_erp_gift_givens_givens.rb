@@ -6,6 +6,8 @@ class CreateErpGiftGivensGivens < ActiveRecord::Migration[5.1]
       t.references :creator, index: true, references: :erp_users
       t.references :contact, index: true, references: :erp_contacts_contacts
       t.text :note
+      t.string :status
+      t.decimal :cache_products_count
 
       t.timestamps
     end
