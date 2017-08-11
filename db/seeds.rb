@@ -1,30 +1,18 @@
 user = Erp::User.first
-contacts = ['Marcus Doe', 'Nick Larson', 'Richard Stone', 'Paul Kiton', 'Mark	Otto']
+contacts = Erp::Contacts::Contact.where('id != ?', Erp::Contacts::Contact.get_main_contact.id)
 status = [Erp::GiftGivens::Given::STATUS_DRAFT,
           Erp::GiftGivens::Given::STATUS_ACTIVE,
           Erp::GiftGivens::Given::STATUS_DELIVERED,
           Erp::GiftGivens::Given::STATUS_DELETED]
 
-# Contacts
-contacts.each do |c|
-  Erp::Contacts::Contact.where(name: c).destroy_all
-  num = Erp::Contacts::Contact.all.order('id DESC').first.id
-  Erp::Contacts::Contact.create(
-    contact_type: Erp::Contacts::Contact::TYPE_PERSON,
-    name: c,
-    code: 'CUS'+ num.to_s.rjust(3, '0'),
-    creator_id: user.id
-  )
-end
-
 
 Erp::GiftGivens::Given.all.destroy_all
 (1..20).each do |num|
-  contact_ps = Erp::Contacts::Contact.where(contact_type: Erp::Contacts::Contact::TYPE_PERSON).order("RANDOM()").first
+  contact = contacts.order("RANDOM()").first
   given = Erp::GiftGivens::Given.create(
     code: 'GG'+ num.to_s.rjust(3, '0'),
     given_date: Time.now,
-    contact_id: contact_ps.id,
+    contact_id: contact.id,
     status: status[rand(status.count)],
     creator_id: user.id
   )
