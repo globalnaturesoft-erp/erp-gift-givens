@@ -133,9 +133,9 @@ module Erp::GiftGivens
 			lastest = Given.all.order("id DESC").first
 			if !lastest.nil?
 				num = lastest.id.to_i + 1
-				self.code = "ST" + num.to_s.rjust(3, '0')
+				self.code = "GG" + num.to_s.rjust(3, '0')
 			else
-				self.code = "ST" + 1.to_s.rjust(3, '0')
+				self.code = "GG" + 1.to_s.rjust(3, '0')
 			end
 		end
   end
