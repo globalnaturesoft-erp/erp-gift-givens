@@ -15,7 +15,7 @@
                 </th>
             <% end %>
             <% if get_columns(params).include?("contact") %>
-                <th class="sortable" sort-by='erp_contacts_contacts.name'>
+                <th>
                     <%= t('.contact') %>
                 </th>
             <% end %>
@@ -54,18 +54,18 @@
     </thead>
     <tbody>
         <% @givens.each do |given| %>
-            <tr class="odd gradeX has-child-table" data-url="<%= erp_gift_givens.given_details_backend_givens_path(id: given.id) %>">
+            <tr class="<%= 'blurred' if given.is_deleted? %> odd gradeX has-child-table" data-url="<%= erp_gift_givens.given_details_backend_givens_path(id: given.id) %>">
                 <td>
                     <%= erp_datalist_check_row(id: given.id) %>
                 </td>
                 <% if get_columns(params).include?("code") %>
                 <td>
                     <i class="fa fa-plus expand tr-expand-button"></i>
-                    <strong><%= link_to given.code, erp_gift_givens.edit_backend_given_path(given) %></strong>
+                    <strong><%= given.code %></strong>
                 </td>
                 <% end %>
                 <% if get_columns(params).include?("given_date") %>
-                <td><%= given.given_date.strftime("%d/%m/%Y") %></td>
+                <td><%= format_date(given.given_date) %></td>
                 <% end %>
                 <% if get_columns(params).include?("contact") %>
                 <td><%= given.contact_name %></td>
@@ -78,15 +78,7 @@
                 <% end %>
                 <% if get_columns(params).include?("status") %>
                 <td>
-                    <% if given.status == Erp::GiftGivens::Given::STATUS_DRAFT %>
-                        <span class="label label-sm label-default"><%= t('.draft') %></span>
-                    <% elsif given.status == Erp::GiftGivens::Given::STATUS_ACTIVE %>
-                        <span class="label label-sm label-success"><%= t('.active') %></span>
-                    <% elsif given.status == Erp::GiftGivens::Given::STATUS_DELIVERED %>
-                        <span class="label label-sm label-finished"><%= t('.delivered') %></span>
-                    <% elsif given.status == Erp::GiftGivens::Given::STATUS_DELETED %>
-                        <span class="label label-sm label-danger"><%= t('.deleted') %></span>
-                    <% end %>
+                    <%= status_label(given.status) %>
                 </td>
                 <% end %>
                 <% if get_columns(params).include?("creator") %>
@@ -104,7 +96,7 @@
                 </td>
                 <% end %>
                 <% if get_columns(params).include?("created_at") %>
-                <td><%= given.created_at.strftime("%d/%m/%Y") %></td>
+                <td><%= format_date(given.created_at) %></td>
                 <% end %>
                 <td>
                     <%= erp_datalist_row_actions(
@@ -112,20 +104,20 @@
                                 {
                                     text: '<i class="fa fa-edit"></i> '+t('.edit'),
                                     href: erp_gift_givens.edit_backend_given_path(given),
-                                    hide: (given.delivered? or given.deleted?)
+                                    hide: (given.is_delivered? or given.is_deleted?)
                                 },
                                 {
                                     text: '<i class="fa fa-check-square-o"></i> '+t('.activate'),
                                     url: erp_gift_givens.set_activate_backend_givens_path(id: given),
                                     data_method: 'PUT',
-                                    hide: !given.draft?,
+                                    hide: !given.is_draft?,
                                     class: 'ajax-link'
                                 },
                                 {
                                     text: '<i class="fa fa-level-up"></i> '+t('.delivery'),
                                     url: erp_gift_givens.set_delivered_backend_givens_path(id: given),
                                     data_method: 'PUT',
-                                    hide: !given.active?,
+                                    hide: !given.is_active?,
                                     class: 'ajax-link'
                                 },
                                 {
@@ -135,7 +127,7 @@
                                     text: '<i class="fa fa-trash"></i> '+t('.delete'),
                                     url: erp_gift_givens.set_deleted_backend_givens_path(id: given),
                                     data_method: 'PUT',
-                                    hide: given.deleted?,
+                                    hide: given.is_deleted?,
                                     class: 'ajax-link'
                                 }
                             ]
