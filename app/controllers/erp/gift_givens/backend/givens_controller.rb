@@ -37,6 +37,7 @@ module Erp
     
         # GET /givens/1/edit
         def edit
+          authorize! :update, @given
         end
     
         # POST /givens
