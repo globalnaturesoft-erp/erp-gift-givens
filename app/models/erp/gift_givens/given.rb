@@ -109,11 +109,11 @@ module Erp::GiftGivens
       update_attributes(status: Erp::StockTransfers::Transfer::STATUS_ACTIVE)
     end
     
-    def set_delivered
+    def set_delivery
       update_attributes(status: Erp::StockTransfers::Transfer::STATUS_DELIVERED)
     end
     
-    def set_deleted
+    def set_delete
       update_attributes(status: Erp::StockTransfers::Transfer::STATUS_DELETED)
     end
     

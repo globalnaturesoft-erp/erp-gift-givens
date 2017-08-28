@@ -6,8 +6,8 @@ Erp::GiftGivens::Engine.routes.draw do
           post 'list'
           get 'given_details'
           put 'set_activate'
-          put 'set_delivered'
-          put 'set_deleted'
+          put 'set_delivery'
+          put 'set_delete'
         end
       end
       resources :given_details do

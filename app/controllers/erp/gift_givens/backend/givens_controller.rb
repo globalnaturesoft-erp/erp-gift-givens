@@ -2,7 +2,8 @@ module Erp
   module GiftGivens
     module Backend
       class GivensController < Erp::Backend::BackendController
-        before_action :set_given, only: [:show, :edit, :update, :destroy, :given_details]
+        before_action :set_given, only: [:show, :edit, :update, :destroy, :given_details,
+                                          :set_draft, :set_activate, :set_delivery, :set_delete]
     
         # GET /givens
         def index
@@ -11,14 +12,6 @@ module Erp
         # POST /givens/list
         def list
           @givens = Given.search(params).paginate(:page => params[:page], :per_page => 10)
-          
-          if params.to_unsafe_hash[:global_filter].present? and params.to_unsafe_hash[:global_filter][:given_from_date].present?
-            @givens = @givens.where('given_date >= ?', params.to_unsafe_hash[:global_filter][:given_from_date].to_date.beginning_of_day)
-          end
-
-          if params.to_unsafe_hash[:global_filter].present? and params.to_unsafe_hash[:global_filter][:given_to_date].present? 
-            @givens = @givens.where('given_date <= ?', params.to_unsafe_hash[:global_filter][:given_to_date].to_date.end_of_day)
-          end
           
           render layout: nil
         end
@@ -35,7 +28,7 @@ module Erp
         # GET /givens/new
         def new
           @given = Given.new
-          @given.given_date = Time.now
+          @given.given_date = Time.current
           
           if request.xhr?
             render '_form', layout: nil, locals: {given: @given}
@@ -50,6 +43,7 @@ module Erp
         def create
           @given = Given.new(given_params)
           @given.creator = current_user
+          @given.set_draft
     
           if @given.save
             if request.xhr?
@@ -73,6 +67,7 @@ module Erp
         # PATCH/PUT /givens/1
         def update
           if @given.update(given_params)
+            @given.set_draft
             if request.xhr?
               render json: {
                 status: 'success',
@@ -99,6 +94,51 @@ module Erp
                 'type': 'success'
               }
             }
+          end
+        end
+        
+        # Activate /givens/status?id=1
+        def set_activate
+          authorize! :activate, @given
+          @given.set_activate
+
+          respond_to do |format|
+          format.json {
+            render json: {
+            'message': t('.success'),
+            'type': 'success'
+            }
+          }
+          end
+        end
+
+        # Delivery /givens/status?id=1
+        def set_delivery
+          authorize! :delivery, @given
+          @given.set_delivery
+
+          respond_to do |format|
+          format.json {
+            render json: {
+            'message': t('.success'),
+            'type': 'success'
+            }
+          }
+          end
+        end
+
+        # Delete /givens/status?id=1
+        def set_delete
+          authorize! :delete, @given
+          @given.set_delete
+
+          respond_to do |format|
+          format.json {
+            render json: {
+            'message': t('.success'),
+            'type': 'success'
+            }
+          }
           end
         end
     
