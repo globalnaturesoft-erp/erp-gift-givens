@@ -16,10 +16,12 @@ vi:
           destroy:
             success: "Xóa phiếu xuất tặng thành công"
           index:
-            given_from_date: "Ngày xuất tặng (từ ngày)"
-            given_to_date: "Ngày xuất tặng (đến ngày)"
-            select_from_date: "Chọn mốc thời gian từ..."
-            select_to_date: "Chọn mốc thời gian đến..."
+            given_from_date: "Ngày xuất tặng"
+            given_to_date: "Ngày xuất tặng"
+            select_from_date: "Từ ngày..."
+            select_to_date: "Đến ngày..."
+            filter_contact: "Người nhận"
+            choose_contact: "Lọc theo người nhận quà..."
             givens: "Xuất tặng"
             create: "Tạo phiếu xuất tặng"
             given_code: "Mã phiếu"
@@ -35,8 +37,8 @@ vi:
             created_at: "Ngày tạo"
             draft: "Phiếu tạm"
             active: "Đã xác nhận"
-            delivered: "Đã giao"
-            deleted: "Đã xóa"
+            delivered: "Đã giao quà"
+            deleted: "Đã bị xóa"
           list:
             code: "Mã phiếu"
             given_date: "Ngày xuất tặng"
@@ -56,7 +58,7 @@ vi:
             draft: "Phiếu tạm"
             active: "Đã xác nhận"
             delivered: "Đã giao"
-            deleted: "Đã xóa"
+            deleted: "Đã bị xóa"
             no_matching_records_found: "Danh sách xuất tặng không tìm thấy."
           new:
             givens: "Xuất tặng"
