@@ -99,39 +99,7 @@
                 <td><%= format_date(given.created_at) %></td>
                 <% end %>
                 <td>
-                    <%= erp_datalist_row_actions(
-                            [
-                                {
-                                    text: '<i class="fa fa-edit"></i> '+t('.edit'),
-                                    href: erp_gift_givens.edit_backend_given_path(given),
-                                    hide: (given.is_delivered? or given.is_deleted?)
-                                },
-                                {
-                                    text: '<i class="fa fa-check-square-o"></i> '+t('.activate'),
-                                    url: erp_gift_givens.set_activate_backend_givens_path(id: given),
-                                    data_method: 'PUT',
-                                    hide: !given.is_draft?,
-                                    class: 'ajax-link'
-                                },
-                                {
-                                    text: '<i class="fa fa-level-up"></i> '+t('.delivery'),
-                                    url: erp_gift_givens.set_delivered_backend_givens_path(id: given),
-                                    data_method: 'PUT',
-                                    hide: !given.is_active?,
-                                    class: 'ajax-link'
-                                },
-                                {
-                                    divider: true
-                                },
-                                {
-                                    text: '<i class="fa fa-trash"></i> '+t('.delete'),
-                                    url: erp_gift_givens.set_deleted_backend_givens_path(id: given),
-                                    data_method: 'PUT',
-                                    hide: given.is_deleted?,
-                                    class: 'ajax-link'
-                                }
-                            ]
-                        ) %>
+                    <%= gift_given_dropdown_actions(given) %>
                 </td>
             </tr>
         <% end %>

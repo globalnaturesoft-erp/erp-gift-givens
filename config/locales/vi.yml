@@ -52,7 +52,7 @@ vi:
             actions: "Tùy chọn"
             edit: "Chỉnh sửa"
             activate: "Xác nhận phiếu"
-            delivery: "Xuất tặng"
+            delivery: "Giao quà tặng"
             delete: "Xóa phiếu tặng"
             delete_confirm: "Dữ liệu này sẽ bị xóa vĩnh viễn! Bạn có thực sự muốn xóa?"
             draft: "Phiếu tạm"
