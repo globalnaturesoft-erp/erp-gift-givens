@@ -30,6 +30,14 @@
                 placeholder: t('.select_to_date')
             }) %>
         </div>
+        <div class="col-md-3">
+            <%= erp_form_control("dataselect", {
+                name: 'contact',
+                label: t('.filter_contact'),
+                placeholder: t('.choose_contact'),
+                url: erp_contacts.dataselect_backend_contacts_path(format: 'json'),
+            }) %>
+        </div>
     </div>
 <% end %>
 
@@ -64,7 +72,7 @@
             text: t('.draft'), name: 'erp_gift_givens_givens.status', value: Erp::GiftGivens::Given::STATUS_DRAFT, checked: true
         },
         {
-            text: t('.active'), name: 'erp_gift_givens_givens.status', value: Erp::GiftGivens::Given::STATUS_ACTIVE, checked: true
+            text: t('.active'), name: 'erp_gift_givens_givens.status', value: Erp::GiftGivens::Given::STATUS_ACTIVE, checked: false
         },
         {
             text: t('.delivered'), name: 'erp_gift_givens_givens.status', value: Erp::GiftGivens::Given::STATUS_DELIVERED, checked: false

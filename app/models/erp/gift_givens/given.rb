@@ -54,9 +54,30 @@ module Erp::GiftGivens
       query = query.where(and_conds.join(' AND ')) if !and_conds.empty?
       
       # search by a given date
-      if params[:date].present?
-				date = params[:date].to_date
-				query = query.where("given_date >= ? AND given_date <= ?", date.beginning_of_day, date.end_of_day)
+      # if params[:date].present?
+			# 	date = params[:date].to_date
+			# 	query = query.where("given_date >= ? AND given_date <= ?", date.beginning_of_day, date.end_of_day)
+			# end
+			
+			# global filters
+      global_filter = params[:global_filter]
+      
+			if global_filter.present?
+				
+				# filter by given from date
+				if global_filter[:given_from_date].present?
+					query = query.where('given_date >= ?', global_filter[:given_from_date].to_date.beginning_of_day)
+				end
+				
+				# filter by given to date
+				if global_filter[:given_to_date].present?
+					query = query.where('given_date <= ?', global_filter[:given_to_date].to_date.end_of_day)
+				end
+				
+				# filter by contact
+				if global_filter[:contact].present?
+					query = query.where(contact_id: global_filter[:contact])
+				end
 			end
       
       return query
@@ -97,19 +118,19 @@ module Erp::GiftGivens
     end
     
     # check if gift given is draft/active/delivered/deleted
-    def draft?
+    def is_draft?
       return self.status == Erp::GiftGivens::Given::STATUS_DRAFT
     end
     
-    def active?
+    def is_active?
       return self.status == Erp::GiftGivens::Given::STATUS_ACTIVE
     end
     
-    def delivered?
+    def is_delivered?
       return self.status == Erp::GiftGivens::Given::STATUS_DELIVERED
     end
     
-    def deleted?
+    def is_deleted?
       return self.status == Erp::GiftGivens::Given::STATUS_DELETED
     end
     
