@@ -49,7 +49,7 @@ vi:
             creator: "Người tạo"
             approver: "Người duyệt"
             created_at: "Ngày tạo"
-            actions: "Tùy chọn"
+            actions: "Thao tác"
             edit: "Chỉnh sửa"
             activate: "Xác nhận phiếu"
             activate_confirm: "Bạn muốn xác nhận phiếu tặng này?"
