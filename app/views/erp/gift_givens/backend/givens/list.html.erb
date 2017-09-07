@@ -9,11 +9,6 @@
                     <%= t('.code') %>
                 </th>
             <% end %>
-            <% if get_columns(params).include?("given_date") %>
-                <th class="sortable" sort-by='erp_gift_givens_givens.given_date'>
-                    <%= t('.given_date') %>
-                </th>
-            <% end %>
             <% if get_columns(params).include?("contact") %>
                 <th>
                     <%= t('.contact') %>
@@ -27,6 +22,11 @@
             <% if get_columns(params).include?("note") %>
                 <th class="text-center">
                     <%= t('.note') %>
+                </th>
+            <% end %>
+            <% if get_columns(params).include?("given_date") %>
+                <th class="sortable" sort-by='erp_gift_givens_givens.given_date'>
+                    <%= t('.given_date') %>
                 </th>
             <% end %>
             <% if get_columns(params).include?("status") %>
@@ -64,17 +64,17 @@
                     <strong><%= given.code %></strong>
                 </td>
                 <% end %>
-                <% if get_columns(params).include?("given_date") %>
-                <td><%= format_date(given.given_date) %></td>
-                <% end %>
                 <% if get_columns(params).include?("contact") %>
                 <td><%= given.contact_name %></td>
                 <% end %>
                 <% if get_columns(params).include?("quantity") %>
-                <td class="text-center"><%= given.cache_products_count.to_i %></td>
+                <td class="text-center"><%= given.cache_products_count %></td>
                 <% end %>
                 <% if get_columns(params).include?("note") %>
                 <td><%= given.note %></td>
+                <% end %>
+                <% if get_columns(params).include?("given_date") %>
+                <td><%= format_date(given.given_date) %></td>
                 <% end %>
                 <% if get_columns(params).include?("status") %>
                 <td>
@@ -82,13 +82,6 @@
                 </td>
                 <% end %>
                 <% if get_columns(params).include?("creator") %>
-                <td>
-                    <%= erp_component('avatar', {
-                        user: given.creator
-                    }) %>
-                </td>
-                <% end %>
-                <% if get_columns(params).include?("approver") %>
                 <td>
                     <%= erp_component('avatar', {
                         user: given.creator

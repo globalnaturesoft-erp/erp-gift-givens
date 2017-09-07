@@ -56,7 +56,7 @@
                                     add_button: t('.add'),
                                     partial: 'erp/gift_givens/backend/given_details/given_line_form',
                                     partial_url: erp_gift_givens.given_line_form_backend_given_details_path,
-                                    items: @given.given_details,
+                                    items: @given.given_details.order('created_at asc'),
                                     item: :given_detail,
                                     add_control_selector: "input[name='product_id']",
                                     add_control: erp_form_control("dataselect", {
@@ -81,7 +81,8 @@
                                             <th>#{t('.product_name')}</th>
                                             <th class='text-right'>#{t('.quantity')}</th>
                                             <th class='text-right'>#{t('.warehouse')}</th>
-                                            <th class='text-right'>#{t('.action')}</th>"
+                                            <th>#{t('.state')}</th>
+                                            <th></th>"
                                 }) %>
                                 
                                 <table class="table">

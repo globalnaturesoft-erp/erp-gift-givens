@@ -48,14 +48,6 @@
             text: t('.given_code'), name: 'erp_gift_givens_givens.code'
         },
         {
-            text: t('.receiver'),
-            name: 'erp_contacts_contacts.name',
-            select: {
-                name: 'erp_contacts_contacts.id',
-                data_url: erp_contacts.dataselect_backend_contacts_path
-            }
-        },
-        {
             text: t('creator'),
             name: 'erp_users.name',
             select: {
@@ -72,10 +64,10 @@
             text: t('.draft'), name: 'erp_gift_givens_givens.status', value: Erp::GiftGivens::Given::STATUS_DRAFT, checked: true
         },
         {
-            text: t('.active'), name: 'erp_gift_givens_givens.status', value: Erp::GiftGivens::Given::STATUS_ACTIVE, checked: false
+            text: t('.active'), name: 'erp_gift_givens_givens.status', value: Erp::GiftGivens::Given::STATUS_ACTIVE, checked: true
         },
         {
-            text: t('.delivered'), name: 'erp_gift_givens_givens.status', value: Erp::GiftGivens::Given::STATUS_DELIVERED, checked: false
+            text: t('.delivered'), name: 'erp_gift_givens_givens.status', value: Erp::GiftGivens::Given::STATUS_DELIVERED, checked: true
         },
         {
             text: t('.deleted'), name: 'erp_gift_givens_givens.status', value: Erp::GiftGivens::Given::STATUS_DELETED, checked: false
@@ -84,9 +76,6 @@
     columns: [
         {
             text: t('.code'), name: 'code', value: true, checked: true
-        },
-        {
-            text: t('.given_date'), name: 'given_date', value: true, checked: true
         },
         {
             text: t('.contact'), name: 'contact', value: true, checked: true
@@ -98,13 +87,13 @@
             text: t('.note'), name: 'note', value: true, checked: false
         },
         {
+            text: t('.given_date'), name: 'given_date', value: true, checked: true
+        },
+        {
             text: t('.status'), name: 'status', value: true, checked: true
         },
         {
             text: t('.creator'), name: 'creator', value: true, checked: true
-        },
-        {
-            text: t('.approver'), name: 'approver', value: true, checked: true
         },
         {
             text: t('.created_at'), name: 'created_at', value: true, checked: false

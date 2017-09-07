@@ -3,20 +3,27 @@
         <table class="table table-bordered table-striped flip-content">
             <thead class="flip-content">
                 <tr>
-                    <th width="20%" class="text-left"><%= t('.product_code') %></th>
-                    <th class="numeric text-left"><%= t('.product_name') %></th>
-                    <th class="numeric text-right"><%= t('.quantity') %></th>
-                    <th class="numeric text-right"><%= t('.unit') %></th>
-                    <th class="numeric text-right"><%= t('.warehouse') %></th>
+                    <th class="bg-yellow bg-font-yellow text-nowrap text-left"><%= t('.product_code') %></th>
+                    <th class="bg-yellow bg-font-yellow text-nowrap text-left"><%= t('.product_name') %></th>
+                    <th class="bg-yellow bg-font-yellow text-nowrap text-right"><%= t('.quantity') %></th>
+                    <th class="bg-yellow bg-font-yellow text-nowrap text-right"><%= t('.unit') %></th>
+                    <th class="bg-yellow bg-font-yellow text-nowrap text-right"><%= t('.state') %></th>
+                    <th class="bg-yellow bg-font-yellow text-nowrap text-right"><%= t('.warehouse') %></th>
                 </tr>
             </thead>
             <tbody>
+                <tr>
+                    <td class="bg-green" colspan="2"><strong> TỔNG CỘNG </strong></td>
+                    <td class="bg-green text-right"><strong><%= @given.cache_products_count %></strong></td>
+                    <td class="bg-green" colspan="3"></td>
+                </tr>
                 <% @given.given_details.each do |given_detail| %>
                 <tr>
                     <td class="text-left"><strong><%= given_detail.product_code %></strong></td>
                     <td class="numeric text-left"><%= given_detail.product_name %></td>
                     <td class="numeric text-right"><%= format_number(given_detail.quantity) %></td>
-                    <td class="numeric text-right"></td>
+                    <td class="numeric text-right"><%= given_detail.product.unit_name %></td>
+                    <td class="numeric text-right"><%= given_detail.state_name %></td>
                     <td class="numeric text-right"><%= given_detail.warehouse_name %></td>
                 </tr>
                 <% end %>

@@ -15,15 +15,21 @@ vi:
             success: "Cập nhật phiếu xuất tặng thành công"
           destroy:
             success: "Xóa phiếu xuất tặng thành công"
+          set_activate:
+            success: "Phiếu xuất tặng đã được kích hoạt thành công"
+          set_delivery:
+            success: "Phiếu xuất tặng đã được giao thành công"
+          set_delete:
+            success: "Phiếu xuất tặng đã bị xóa thành công"
           index:
-            given_from_date: "Ngày xuất tặng"
-            given_to_date: "Ngày xuất tặng"
-            select_from_date: "Từ ngày..."
-            select_to_date: "Đến ngày..."
+            given_from_date: "Từ ngày"
+            given_to_date: "Đến ngày"
+            select_from_date: "Lọc theo ngày tặng - Từ..."
+            select_to_date: "Lọc theo ngày tặng - Đến..."
             filter_contact: "Người nhận"
             choose_contact: "Lọc theo người nhận quà..."
             givens: "Xuất tặng"
-            create: "Tạo phiếu xuất tặng"
+            create: "Thêm phiếu xuất tặng"
             given_code: "Mã phiếu"
             code: "Mã phiếu"
             given_date: "Ngày xuất tặng"
@@ -64,11 +70,11 @@ vi:
             no_matching_records_found: "Danh sách xuất tặng không tìm thấy."
           new:
             givens: "Xuất tặng"
-            create: "Tạo phiếu xuất tặng"
+            create: "Thêm phiếu xuất tặng"
           edit:
             givens: "Xuất tặng"
             edit: "Chỉnh sửa"
-            create: "Tạo phiếu xuất tặng"
+            create: "Thêm phiếu xuất tặng"
           form:
             code: "Mã phiếu"
             given_date: "Ngày xuất tặng"
@@ -89,6 +95,7 @@ vi:
             product_name: "Tên sản phẩm"
             quantity: "Số lượng"
             warehouse: "Kho xuất hàng"
+            state: "Tình trạng sản phẩm"
             action: "Hành động"
             quantity_total: "Tổng số lượng"
             submit: "Lưu"
@@ -98,10 +105,12 @@ vi:
             product_name: "Tên sản phẩm"
             quantity: "Số lượng"
             unit: "Đơn vị tính"
+            state: "Tình trạng"
             warehouse: "Xuất từ kho"
         given_details:
           given_line_form:
             choose_warehouse: "Chọn kho xuất hàng tặng"
+            choose_state: "Trạng thái của sản phẩm"
             
   activerecord:
     errors:

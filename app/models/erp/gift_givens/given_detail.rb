@@ -3,6 +3,9 @@ module Erp::GiftGivens
     belongs_to :product, class_name: 'Erp::Products::Product', foreign_key: :product_id
     belongs_to :warehouse, class_name: 'Erp::Warehouses::Warehouse', foreign_key: :warehouse_id
     belongs_to :given, inverse_of: :given_details
+    belongs_to :state, class_name: 'Erp::Products::State'
+    
+    validates :warehouse_id, :state_id, presence: true
     
     after_save :update_given_cache_products_count
     
@@ -23,6 +26,10 @@ module Erp::GiftGivens
     
     def warehouse_name
       warehouse.nil? ? '' : warehouse.name
+    end
+    
+    def state_name
+      state.nil? ? '' : state.name
     end
   end
 end

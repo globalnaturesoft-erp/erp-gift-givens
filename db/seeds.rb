@@ -21,7 +21,8 @@ Erp::GiftGivens::Given.all.destroy_all
       product_id: product.id,
       given_id: given.id,
       quantity: rand(1..3),
-      warehouse_id: Erp::Warehouses::Warehouse.order("RANDOM()").first.id
+      warehouse_id: Erp::Warehouses::Warehouse.order("RANDOM()").first.id,
+      state_id: Erp::Products::State.first.id
     )
   end
 end
