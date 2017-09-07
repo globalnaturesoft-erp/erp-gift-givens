@@ -3,7 +3,7 @@ module Erp::GiftGivens
     belongs_to :creator, class_name: "Erp::User"
     belongs_to :contact, class_name: "Erp::Contacts::Contact", foreign_key: :contact_id
     has_many :given_details, inverse_of: :given, dependent: :destroy
-    accepts_nested_attributes_for :given_details, :reject_if => lambda { |a| a[:product_id].blank? || a[:warehouse_id].blank? || a[:quantity].blank? || a[:quantity].to_i <= 0 }
+    accepts_nested_attributes_for :given_details, :reject_if => lambda { |a| a[:product_id].blank? || a[:warehouse_id].blank? || a[:quantity].blank? || a[:quantity].to_i <= 0 }, :allow_destroy => true
     
     after_save :update_cache_products_count
     after_save :generate_code
