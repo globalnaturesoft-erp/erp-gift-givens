@@ -25,4 +25,5 @@ Erp::GiftGivens::Given.all.destroy_all
       state_id: Erp::Products::State.first.id
     )
   end
+  puts '==== Gift given ' +num.ordinalize+ ' complete ('+given.code+') ===='
 end
