@@ -8,7 +8,8 @@
         name: 'given[given_details_attributes][' + uid + '][quantity]',
         value: given_detail.quantity,
         text: given_detail.quantity,
-        class: "line_quantity inline"
+        class: "line_quantity inline",
+        required: true,
     }) %>
 </td>
 <td width='20%'>
@@ -17,7 +18,8 @@
         value: given_detail.warehouse_id,
         text: given_detail.warehouse_name,
         placeholder: t('.choose_warehouse'),
-        url: erp_warehouses.dataselect_backend_warehouses_path(format: 'json')
+        url: erp_warehouses.dataselect_backend_warehouses_path(format: 'json'),
+        required: true,
     }) %>
 </td>
 <td width='20%'>
@@ -28,7 +30,8 @@
         placeholder: t('.choose_state'),
         url: erp_products.dataselect_backend_states_path(format: 'json'),
         required: true,
-        errors: given_detail.errors.full_messages_for(:state_id)
+        errors: given_detail.errors.full_messages_for(:state_id),
+        required: true,
     }) %>
 </td>
 <td class="text-right">
