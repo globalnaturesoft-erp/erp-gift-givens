@@ -17,6 +17,10 @@ Erp::Ability.class_eval do
       given.is_draft? or given.is_active? or given.is_delivered?
     end
     
+    can :print, Erp::GiftGivens::Given do |given|
+      given.is_active? or given.is_delivered?
+    end
+    
     can :export_file, Erp::GiftGivens::Given do |given|
       given.is_draft? or given.is_active? or given.is_delivered?
     end

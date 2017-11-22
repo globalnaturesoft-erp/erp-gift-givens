@@ -6,9 +6,13 @@ module Erp
       def gift_given_dropdown_actions(given)
         actions = []
         actions << {
+          text: '<i class="fa fa-print"></i> '+t('.view_print'),
+          href: erp_gift_givens.backend_given_path(given)
+        } if can? :print, given
+        actions << {
           text: '<i class="fa fa-edit"></i> '+t('.edit'),
-          href: erp_gift_givens.edit_backend_given_path(given),
-        }
+          url: erp_gift_givens.edit_backend_given_path(given),
+        } if can? :update, given
         actions << {
           text: '<i class="fa fa-check-square-o"></i> '+t('.activate'),
           url: erp_gift_givens.set_activate_backend_givens_path(id: given),

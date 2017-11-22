@@ -6,7 +6,6 @@ module Erp::GiftGivens
     accepts_nested_attributes_for :given_details, :reject_if => lambda { |a| a[:product_id].blank? || a[:warehouse_id].blank? || a[:quantity].blank? || a[:quantity].to_i <= 0 }, :allow_destroy => true
     
     after_save :update_cache_products_count
-    after_save :generate_code
     
     validates :code, uniqueness: true
     validates :given_date, :contact_id, presence: true
@@ -101,6 +100,11 @@ module Erp::GiftGivens
       return query
     end
     
+    # display creator name
+    def creator_name
+      creator.present? ? creator.name : ''
+    end
+    
     # Set status for stock transfer
     def set_draft
       update_attributes(status: Erp::StockTransfers::Transfer::STATUS_DRAFT)
@@ -151,9 +155,12 @@ module Erp::GiftGivens
 		end
     
     # Generate code
+    before_validation :generate_code
     def generate_code
 			if !code.present?
-				update_columns(code: 'GG' + id.to_s.rjust(5, '0'))
+				num = Erp::GiftGivens::Given.where('given_date >= ? AND given_date <= ?', self.given_date.beginning_of_month, self.given_date.end_of_month).count + 1
+
+				self.code = 'XT' + given_date.strftime("%m") + given_date.strftime("%Y").last(2) + "-" + num.to_s.rjust(3, '0')
 			end
 		end
   end

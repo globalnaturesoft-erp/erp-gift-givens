@@ -8,6 +8,8 @@ Erp::GiftGivens::Engine.routes.draw do
           put 'set_activate'
           put 'set_delivery'
           put 'set_delete'
+          post 'show_list'
+          get 'pdf'
         end
       end
       resources :given_details do

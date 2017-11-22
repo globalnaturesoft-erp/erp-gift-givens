@@ -2,7 +2,7 @@ module Erp
   module GiftGivens
     module Backend
       class GivensController < Erp::Backend::BackendController
-        before_action :set_given, only: [:show, :edit, :update, :destroy, :given_details,
+        before_action :set_given, only: [:show_list, :pdf, :show, :edit, :update, :given_details,
                                           :set_draft, :set_activate, :set_delivery, :set_delete]
     
         # GET /givens
@@ -23,6 +23,48 @@ module Erp
     
         # GET /givens/1
         def show
+          respond_to do |format|
+            format.html
+            format.pdf do
+              render pdf: "show_list",
+                layout: 'erp/backend/pdf'
+            end
+          end
+        end
+        
+        # GET /orders/1
+        def pdf
+          #authorize! :read, @delivery
+
+          respond_to do |format|
+            format.html
+            format.pdf do
+              if @given.given_details.count < 8
+                render pdf: "#{@given.code}",
+                  title: "#{@given.code}",
+                  layout: 'erp/backend/pdf',
+                  page_size: 'A5',
+                  orientation: 'Landscape',
+                  margin: {
+                    top: 7,                     # default 10 (mm)
+                    bottom: 7,
+                    left: 7,
+                    right: 7
+                  }
+              else
+                render pdf: "#{@given.code}",
+                  title: "#{@given.code}",
+                  layout: 'erp/backend/pdf',
+                  page_size: 'A4',
+                  margin: {
+                    top: 7,                     # default 10 (mm)
+                    bottom: 7,
+                    left: 7,
+                    right: 7
+                  }
+              end
+            end
+          end
         end
     
         # GET /givens/new
@@ -44,7 +86,7 @@ module Erp
         def create
           @given = Given.new(given_params)
           @given.creator = current_user
-          @given.set_draft
+          @given.set_activate
     
           if @given.save
             if request.xhr?
@@ -68,7 +110,7 @@ module Erp
         # PATCH/PUT /givens/1
         def update
           if @given.update(given_params)
-            @given.set_draft
+            @given.set_activate
             if request.xhr?
               render json: {
                 status: 'success',
@@ -80,21 +122,6 @@ module Erp
             end
           else
             render :edit
-          end
-        end
-    
-        # DELETE /givens/1
-        def destroy
-          @given.destroy
-          
-          respond_to do |format|
-            format.html { redirect_to erp_gift_givens.backend_givens_path, notice: t('.success') }
-            format.json {
-              render json: {
-                'message': t('.success'),
-                'type': 'success'
-              }
-            }
           end
         end
         
