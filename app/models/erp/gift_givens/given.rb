@@ -124,19 +124,19 @@ module Erp::GiftGivens
 
     # Set status for stock transfer
     def set_draft
-      update_attributes(status: Erp::StockTransfers::Transfer::STATUS_DRAFT)
+      update_attributes(status: Erp::GiftGivens::Given::STATUS_DRAFT)
     end
 
     def set_activate
-      update_attributes(status: Erp::StockTransfers::Transfer::STATUS_ACTIVE)
+      update_attributes(status: Erp::GiftGivens::Given::STATUS_ACTIVE)
     end
 
     def set_delivery
-      update_attributes(status: Erp::StockTransfers::Transfer::STATUS_DELIVERED)
+      update_attributes(status: Erp::GiftGivens::Given::STATUS_DELIVERED)
     end
 
     def set_delete
-      update_attributes(status: Erp::StockTransfers::Transfer::STATUS_DELETED)
+      update_attributes(status: Erp::GiftGivens::Givenr::STATUS_DELETED)
     end
 
     # check if gift given is draft/active/delivered/deleted

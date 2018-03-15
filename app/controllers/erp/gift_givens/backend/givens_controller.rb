@@ -4,23 +4,23 @@ module Erp
       class GivensController < Erp::Backend::BackendController
         before_action :set_given, only: [:show_list, :pdf, :show, :edit, :update, :given_details,
                                           :set_draft, :set_activate, :set_delivery, :set_delete]
-    
+
         # GET /givens
         def index
         end
-        
+
         # POST /givens/list
         def list
           @givens = Given.search(params).paginate(:page => params[:page], :per_page => 10)
-          
+
           render layout: nil
         end
-        
+
         # GET /given details
         def given_details
           render layout: nil
         end
-    
+
         # GET /givens/1
         def show
           respond_to do |format|
@@ -31,7 +31,7 @@ module Erp
             end
           end
         end
-        
+
         # GET /orders/1
         def pdf
           #authorize! :read, @delivery
@@ -66,28 +66,28 @@ module Erp
             end
           end
         end
-    
+
         # GET /givens/new
         def new
           @given = Given.new
           @given.given_date = Time.current
-          
+
           if request.xhr?
             render '_form', layout: nil, locals: {given: @given}
           end
         end
-    
+
         # GET /givens/1/edit
         def edit
           authorize! :update, @given
         end
-    
+
         # POST /givens
         def create
           @given = Given.new(given_params)
           @given.creator = current_user
-          @given.set_activate
-    
+          @given.status = Erp::StockTransfers::Transfer::STATUS_DELIVERED
+
           if @given.save
             if request.xhr?
               render json: {
@@ -106,7 +106,7 @@ module Erp
             end
           end
         end
-    
+
         # PATCH/PUT /givens/1
         def update
           if @given.update(given_params)
@@ -124,7 +124,7 @@ module Erp
             render :edit
           end
         end
-        
+
         # Activate /givens/status?id=1
         def set_activate
           authorize! :activate, @given
@@ -169,13 +169,13 @@ module Erp
           }
           end
         end
-    
+
         private
           # Use callbacks to share common setup or constraints between actions.
           def set_given
             @given = Given.find(params[:id])
           end
-    
+
           # Only allow a trusted parameter "white list" through.
           def given_params
             params.fetch(:given, {}).permit(:code, :given_date, :contact_id, :note,
