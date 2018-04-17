@@ -7,7 +7,7 @@ Erp::GiftGivens::Engine.routes.draw do
           get 'given_details'
           put 'set_activate'
           put 'set_delivery'
-          put 'set_delete'
+          put 'set_deleted'
           post 'show_list'
           get 'pdf'
         end

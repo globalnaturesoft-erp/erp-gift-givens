@@ -39,7 +39,7 @@
             },
             {
                 text: '<i class="fa fa-close"></i> '+t('.delete'),
-                href: erp_gift_givens.set_delete_backend_givens_path(id: @given.id),
+                href: erp_gift_givens.set_deleted_backend_givens_path(id: @given.id),
                 data_method: 'PUT',
                 data_confirm: t('.delete_confirm'),
                 hide: @given.is_deleted?,

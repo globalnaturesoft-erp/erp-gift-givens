@@ -135,8 +135,8 @@ module Erp::GiftGivens
       update_attributes(status: Erp::GiftGivens::Given::STATUS_DELIVERED)
     end
 
-    def set_delete
-      update_attributes(status: Erp::GiftGivens::Givenr::STATUS_DELETED)
+    def set_deleted
+      update_attributes(status: Erp::GiftGivens::Given::STATUS_DELETED)
     end
 
     # check if gift given is draft/active/delivered/deleted

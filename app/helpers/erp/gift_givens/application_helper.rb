@@ -14,14 +14,14 @@ module Erp
           url: erp_gift_givens.edit_backend_given_path(given),
         } if can? :update, given
         actions << {
-          text: '<i class="fa fa-check-square-o"></i> '+t('.activate'),
+          text: '<i class="fa fa-check-square-o"></i> '+t('.set_activate'),
           url: erp_gift_givens.set_activate_backend_givens_path(id: given),
           data_method: 'PUT',
           class: 'ajax-link',
           data_confirm: t('.activate_confirm')
         } if can? :activate, given
         actions << {
-          text: '<i class="fa fa-send-o"></i> '+t('.delivery'),
+          text: '<i class="fa fa-send-o"></i> '+t('.set_delivery'),
           url: erp_gift_givens.set_delivery_backend_givens_path(id: given),
           data_method: 'PUT',
           class: 'ajax-link',
@@ -29,10 +29,9 @@ module Erp
         } if can? :delivery, given
         actions << { divider: true } if can? :delete, given
         actions << {
-          text: '<i class="fa fa-trash"></i> '+t('.delete'),
-          url: erp_gift_givens.set_delete_backend_givens_path(id: given),
+          text: '<i class="fa fa-trash"></i> '+t('.set_deleted'),
+          url: erp_gift_givens.set_deleted_backend_givens_path(id: given),
           data_method: 'PUT',
-          hide: given.is_deleted?,
           class: 'ajax-link',
           data_confirm: t('.delete_confirm')
         } if can? :delete, given

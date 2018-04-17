@@ -3,7 +3,7 @@ module Erp
     module Backend
       class GivensController < Erp::Backend::BackendController
         before_action :set_given, only: [:show_list, :pdf, :show, :edit, :update, :given_details,
-                                          :set_draft, :set_activate, :set_delivery, :set_delete]
+                                          :set_draft, :set_activate, :set_delivery, :set_deleted]
 
         # GET /givens
         def index
@@ -34,7 +34,7 @@ module Erp
 
         # GET /orders/1
         def pdf
-          #authorize! :read, @delivery
+          authorize! :print, @given
 
           respond_to do |format|
             format.html
@@ -156,9 +156,9 @@ module Erp
         end
 
         # Delete /givens/status?id=1
-        def set_delete
+        def set_deleted
           authorize! :delete, @given
-          @given.set_delete
+          @given.set_deleted
 
           respond_to do |format|
           format.json {

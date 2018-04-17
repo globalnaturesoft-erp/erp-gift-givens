@@ -19,7 +19,7 @@ vi:
             success: "Phiếu xuất tặng đã được kích hoạt thành công"
           set_delivery:
             success: "Phiếu xuất tặng đã được giao thành công"
-          set_delete:
+          set_deleted:
             success: "Phiếu xuất tặng đã bị xóa thành công"
           index:
             given_from_date: "Từ ngày"
@@ -58,11 +58,11 @@ vi:
             actions: "Thao tác"
             view_print: "Xem và In"
             edit: "Chỉnh sửa"
-            activate: "Xác nhận phiếu"
+            set_activate: "Xác nhận phiếu"
             activate_confirm: "Bạn muốn xác nhận phiếu tặng này?"
-            delivery: "Giao quà tặng"
+            set_delivery: "Giao quà tặng"
             delivery_confirm: "Bạn có chắc chắn sản phẩm đã được chuyển đến tay người nhận?"
-            delete: "Xóa phiếu tặng"
+            set_deleted: "Xóa phiếu tặng"
             delete_confirm: "Bạn chắc chắn muốn xóa phiếu tặng này?"
             draft: "Phiếu tạm"
             active: "Đã xác nhận"
