@@ -10,6 +10,7 @@ Erp::GiftGivens::Engine.routes.draw do
           put 'set_deleted'
           post 'show_list'
           get 'pdf'
+          get 'xlsx'
         end
       end
       resources :given_details do

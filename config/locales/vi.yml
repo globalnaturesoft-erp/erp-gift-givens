@@ -143,6 +143,16 @@ vi:
             price: "Đơn giá"
             total_amount: "Thành tiền"
             note: "Ghi chú"
+          xlsx:
+            ordinal_number: "STT"
+            items: "Tên sản phẩm"
+            warehouse: "Kho xuất"
+            state: "Tình trạng"
+            units: "ĐVT"
+            quantity: "Số lượng"
+            note: "Ghi chú"
+            price: "Đơn giá"
+            total_amount: "Thành tiền"
         given_details:
           given_line_form:
             choose_warehouse: "Chọn kho xuất hàng tặng"

@@ -2,7 +2,7 @@ module Erp
   module GiftGivens
     module Backend
       class GivensController < Erp::Backend::BackendController
-        before_action :set_given, only: [:show_list, :pdf, :show, :edit, :update, :given_details,
+        before_action :set_given, only: [:show_list, :pdf, :show, :xlsx, :edit, :update, :given_details,
                                           :set_draft, :set_activate, :set_delivery, :set_deleted]
 
         # GET /givens
@@ -64,6 +64,14 @@ module Erp
                   }
               end
             end
+          end
+        end
+        
+        def xlsx
+          respond_to do |format|
+            format.xlsx {
+              response.headers['Content-Disposition'] = "attachment; filename='Phieu xuat tang #{@given.code}.xlsx'"
+            }
           end
         end
 
