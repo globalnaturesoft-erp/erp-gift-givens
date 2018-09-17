@@ -15,6 +15,11 @@ module Erp::GiftGivens
     STATUS_ACTIVE = 'active'
     STATUS_DELIVERED = 'delivered'
     STATUS_DELETED = 'deleted'
+    
+    # update confirmed at
+    def update_confirmed_at
+      self.update_columns(confirmed_at: Time.now)
+    end
 
     # Filters
     def self.filter(query, params)

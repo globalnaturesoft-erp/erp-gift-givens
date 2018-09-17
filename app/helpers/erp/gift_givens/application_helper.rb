@@ -7,18 +7,20 @@ module Erp
         actions = []
         actions << {
           text: '<i class="fa fa-print"></i> '+t('.view_print'),
-          href: erp_gift_givens.backend_given_path(given)
+          href: erp_gift_givens.backend_given_path(given),
+          class: 'modal-link',
         } if can? :print, given
         
         actions << {
           text: '<i class="fa fa-file-excel-o"></i> Xuất excel',
           url: erp_gift_givens.xlsx_backend_givens_path(id: given.id, format: 'xlsx'),
           target: '_blank'
-        } if true
+        } if can? :export_file, given
         
         actions << {
           text: '<i class="fa fa-edit"></i> '+t('.edit'),
           url: erp_gift_givens.edit_backend_given_path(given),
+          class: 'modal-link',
         } if can? :update, given
         
         actions << {

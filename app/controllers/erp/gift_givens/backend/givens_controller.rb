@@ -7,10 +7,13 @@ module Erp
 
         # GET /givens
         def index
+          authorize! :sales_gift_givens_index, nil
         end
 
         # POST /givens/list
         def list
+          authorize! :sales_gift_givens_index, nil
+          
           @givens = Given.search(params).paginate(:page => params[:page], :per_page => 10)
 
           render layout: nil
@@ -68,6 +71,8 @@ module Erp
         end
         
         def xlsx
+          authorize! :export_file, @given
+          
           respond_to do |format|
             format.xlsx {
               response.headers['Content-Disposition'] = "attachment; filename='Phieu xuat tang #{@given.code}.xlsx'"
@@ -78,6 +83,9 @@ module Erp
         # GET /givens/new
         def new
           @given = Given.new
+          
+          authorize! :create, @given
+          
           @given.given_date = Time.current
 
           if request.xhr?
@@ -93,6 +101,9 @@ module Erp
         # POST /givens
         def create
           @given = Given.new(given_params)
+          
+          authorize! :create, @given
+          
           @given.creator = current_user
           @given.status = Erp::StockTransfers::Transfer::STATUS_DELIVERED
 
@@ -117,6 +128,8 @@ module Erp
 
         # PATCH/PUT /givens/1
         def update
+          authorize! :update, @given
+          
           if @given.update(given_params)
             @given.set_activate
             if request.xhr?
@@ -136,6 +149,7 @@ module Erp
         # Activate /givens/status?id=1
         def set_activate
           authorize! :activate, @given
+          
           @given.set_activate
 
           respond_to do |format|
@@ -151,7 +165,9 @@ module Erp
         # Delivery /givens/status?id=1
         def set_delivery
           authorize! :delivery, @given
+          
           @given.set_delivery
+          @given.update_confirmed_at
 
           respond_to do |format|
           format.json {
@@ -166,6 +182,7 @@ module Erp
         # Delete /givens/status?id=1
         def set_deleted
           authorize! :delete, @given
+          
           @given.set_deleted
 
           respond_to do |format|

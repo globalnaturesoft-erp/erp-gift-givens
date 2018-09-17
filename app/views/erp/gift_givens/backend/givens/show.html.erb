@@ -12,43 +12,39 @@
 <% end %>
 
 <% content_for :page_toolbar do %>
-
+    <%
+        actions = []
+        actions << {
+            text: '<i class="fa fa-edit"></i> '+t('.edit'),
+            url: erp_gift_givens.edit_backend_given_path(@given),
+        } if can? :update, @given
+        actions << {
+            text: '<i class="fa fa-check-square-o"></i> '+t('.activate'),
+            href: erp_gift_givens.set_activate_backend_givens_path(id: @given.id),
+            data_method: 'PUT',
+            data_confirm: t('.activate_confirm'),
+            class: 'ajax-link'
+        } if can? :activate, @given
+        actions << {
+            text: '<i class="fa fa-send-o"></i> '+t('.delivery'),
+            href: erp_gift_givens.set_delivery_backend_givens_path(id: @given.id),
+            data_method: 'PUT',
+            data_confirm: t('.delivery_confirm'),
+            class: 'ajax-link'
+        } if can? :delivery, @given
+        actions << {
+            text: '<i class="fa fa-close"></i> '+t('.delete'),
+            href: erp_gift_givens.set_deleted_backend_givens_path(id: @given.id),
+            data_method: 'PUT',
+            data_confirm: t('.delete_confirm'),
+            class: 'ajax-link'
+        } if can? :delete, @given
+    %>
     <%= erp_component('button/actions', {
-        actions:
-        [
-            {
-                text: '<i class="fa fa-edit"></i> '+t('.edit'),
-                url: erp_gift_givens.edit_backend_given_path(@given),
-                hide: false,
-            },
-            {
-                text: '<i class="fa fa-check-square-o"></i> '+t('.activate'),
-                href: erp_gift_givens.set_activate_backend_givens_path(id: @given.id),
-                data_method: 'PUT',
-                data_confirm: t('.activate_confirm'),
-                hide: (@given.is_active? || @given.is_delivered? || @given.is_deleted?),
-                class: 'ajax-link'
-            },
-            {
-                text: '<i class="fa fa-send-o"></i> '+t('.delivery'),
-                href: erp_gift_givens.set_delivery_backend_givens_path(id: @given.id),
-                data_method: 'PUT',
-                data_confirm: t('.delivery_confirm'),
-                hide: (@given.is_draft? || @given.is_delivered? || @given.is_deleted?),
-                class: 'ajax-link'
-            },
-            {
-                text: '<i class="fa fa-close"></i> '+t('.delete'),
-                href: erp_gift_givens.set_deleted_backend_givens_path(id: @given.id),
-                data_method: 'PUT',
-                data_confirm: t('.delete_confirm'),
-                hide: @given.is_deleted?,
-                class: 'ajax-link'
-            }
-        ],
+        actions: actions,
         text: t('.options'),
         class: 'btn-noborder'
-    }) %>
+    }) if (can? :update, @given) or (can? :activate, @given) or (can? :delivery, @given) or (can? :delete, @given) %>
     
 <% end %>
 
