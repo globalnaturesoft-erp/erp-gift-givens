@@ -105,7 +105,7 @@ module Erp
           authorize! :create, @given
           
           @given.creator = current_user
-          @given.status = Erp::StockTransfers::Transfer::STATUS_DELIVERED
+          @given.status = Erp::GiftGivens::Given::STATUS_ACTIVE
 
           if @given.save
             if request.xhr?
@@ -115,7 +115,7 @@ module Erp
                 value: @given.id
               }
             else
-              redirect_to erp_gift_givens.edit_backend_given_path(@given), notice: t('.success')
+              redirect_to erp_gift_givens.backend_givens_path, notice: t('.success')
             end
           else
             if request.xhr?
@@ -139,7 +139,7 @@ module Erp
                 value: @given.id
               }
             else
-              redirect_to erp_gift_givens.edit_backend_given_path(@given), notice: t('.success')
+              redirect_to erp_gift_givens.backend_givens_path, notice: t('.success')
             end
           else
             render :edit

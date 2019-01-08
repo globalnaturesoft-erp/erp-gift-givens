@@ -68,6 +68,8 @@ vi:
             active: "Đã xác nhận"
             delivered: "Đã giao hàng"
             deleted: "Đã bị xóa"
+            in_stock: "Còn hàng"
+            out_of_stock: "Hết hàng"
             no_matching_records_found: "Danh sách xuất tặng không tìm thấy."
           new:
             givens: "Xuất tặng"

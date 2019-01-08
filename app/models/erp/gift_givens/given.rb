@@ -185,5 +185,25 @@ module Erp::GiftGivens
 				self.code = 'XT' + given_date.strftime("%m") + given_date.strftime("%Y").last(2) + "-" + num.to_s.rjust(3, '0')
 			end
 		end
+    
+    # check stock available
+    def check_stock_available
+      self.given_details.each do |given_detail|
+        if given_detail.quantity > given_detail.product.get_stock(warehouse_ids: given_detail.warehouse_id, state_ids: given_detail.state_id)
+          return false
+        end
+      end
+      return true
+    end
+    
+    def check_stock_status
+      if status == Erp::GiftGivens::Given::STATUS_ACTIVE
+        if check_stock_available == false
+          'out_of_stock'
+        else
+          'in_stock'
+        end
+      end
+    end
   end
 end

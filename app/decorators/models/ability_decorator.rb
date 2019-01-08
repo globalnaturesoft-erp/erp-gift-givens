@@ -18,7 +18,7 @@ Erp::Ability.class_eval do
     
     # giao hang
     can :delivery, Erp::GiftGivens::Given do |given|
-      given.is_draft? or given.is_active?
+      (given.is_draft? or given.is_active?) and (given.check_stock_available == true)
     end
     
     # xoa / huy phieu

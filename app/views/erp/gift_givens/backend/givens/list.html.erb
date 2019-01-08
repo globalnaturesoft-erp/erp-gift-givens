@@ -78,7 +78,8 @@
                 <% end %>
                 <% if get_columns(params).include?("status") %>
                 <td>
-                    <%= status_label(given.status) %>
+                    <%= status_label(given.status) %> <br>
+                    <%= status_label(given.check_stock_status) %>
                 </td>
                 <% end %>
                 <% if get_columns(params).include?("creator") %>
