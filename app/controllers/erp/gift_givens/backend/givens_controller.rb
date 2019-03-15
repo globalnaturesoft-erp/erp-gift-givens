@@ -75,7 +75,7 @@ module Erp
           
           respond_to do |format|
             format.xlsx {
-              response.headers['Content-Disposition'] = "attachment; filename='Phieu xuat tang #{@given.code}.xlsx'"
+              response.headers['Content-Disposition'] = "attachment; filename=\"Phieu xuat tang #{@given.code}.xlsx\""
             }
           end
         end
