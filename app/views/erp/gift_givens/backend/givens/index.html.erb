@@ -61,19 +61,7 @@
 
 <%= erp_datalist(
     url: erp_gift_givens.list_backend_givens_path,
-    keywords: [
-        {
-            text: t('.given_code'), name: 'erp_gift_givens_givens.code'
-        },
-        {
-            text: t('creator'),
-            name: 'erp_users.name',
-            select: {
-                name: 'erp_users.id',
-                data_url: erp.dataselect_backend_users_path
-            }
-        }
-    ],
+    keyword: true,
     actions: [
 
     ],

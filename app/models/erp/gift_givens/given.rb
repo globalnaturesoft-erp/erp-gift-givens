@@ -101,6 +101,15 @@ module Erp::GiftGivens
 					query = query.where(contact_id: global_filter[:contact])
 				end
 			end
+			
+			# single keyword
+      if params[:keyword].present?
+				keyword = params[:keyword].strip.downcase
+				keyword.split(' ').each do |q|
+					q = q.strip
+					query = query.where('LOWER(erp_gift_givens_givens.cache_search) LIKE ?', '%'+q+'%')
+				end
+			end
 
       return query
     end
@@ -184,6 +193,21 @@ module Erp::GiftGivens
 
 				self.code = 'XT' + given_date.strftime("%m") + given_date.strftime("%Y").last(2) + "-" + num.to_s.rjust(3, '0')
 			end
+		end
+    
+    # Update casche search
+    after_save :update_cache_search
+		def update_cache_search
+			str = []
+			str << code.to_s.downcase.strip
+			str << contact_name.to_s.downcase.strip
+			str << creator_name.to_s.downcase.strip
+			given_details.each do |gd|
+        str << gd.product_name.to_s.downcase.strip
+        str << gd.warehouse_name.to_s.downcase.strip
+			end
+
+			self.update_column(:cache_search, str.join(" ") + " " + str.join(" ").to_ascii)
 		end
     
     # check stock available
